@@ -24,3 +24,44 @@ public:
 	    return cnt;
 	}
 };
+
+/*
+OPTIMISATION
+PSEUDO CODE:
+TC:O(N^2)
+SC:O(1)
+PSEUDO CODE:
+sort in descending order
+1.run an outer loop
+2.take high=i+1
+3.low=n-1
+4.while(high<low){
+	    if(arr[high]+arr[low]==arr[i])cnt++;
+	    if(arr[high]+arr[low]<arr[i])low--;
+	            else
+	             high++;
+	        }
+	    }
+	    return cnt
+*/
+
+class Solution{
+public:	
+	
+	int countTriplet(int arr[], int n)
+	{   int cnt=0;
+	    // Your code goes here
+	    sort(arr,arr+n,greater<int>()); //sort in descending order
+	    for(int i=0;i<n;i++){
+	        int high=i+1;
+	        int low=n-1;
+	        while(high<low){
+	            if(arr[high]+arr[low]==arr[i])cnt++;
+	            if(arr[high]+arr[low]<arr[i])low--;
+	            else
+	             high++;
+	        }
+	    }
+	    return cnt;
+	}
+};
