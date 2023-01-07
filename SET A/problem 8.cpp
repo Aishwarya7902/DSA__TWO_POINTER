@@ -23,9 +23,15 @@ public:
 
 /*OPTIMISATION
 PSEUDO CODE
-1.since the array is in sorted order , hence the least element is in the leftmost and biggest no is in the right most
-since array may contain negative elements too,it means after squaring the most negative element will become
-the greatest element ,hence in the ans array it will be on the right most.
+1.since the array is in sorted order , 
+hence the least element is in the leftmost 
+and biggest no is in the right most
+since array may contain negative elements too,
+it means after squaring 
+the most negative element will become
+the greatest element ,
+hence in the ans array 
+it will be on the right most.
 
 TC:O(N)
 SC:O(1)
