@@ -34,6 +34,18 @@ int main() {
 two pointer
 tc:o(n)
 sc:o(1)
+int count=0,sum=nums[0];
+int n=nums.size();
+//if sum is less than k 
+//move end by one position
+//update count and sum accordingly
+//for last element
+//end may become n
+// if sum is greater than or equal to k 
+//subtract arr[start] from sum
+//deacrease sliding window by moving start by one position
+
+
 */
 #include <bits/stdc++.h>
 using namespace std;
