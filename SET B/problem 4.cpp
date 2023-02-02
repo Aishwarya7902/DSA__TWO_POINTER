@@ -34,53 +34,54 @@ int main() {
 two pointer
 tc:o(n)
 sc:o(1)
+start=0,end=0
 int count=0,sum=nums[0];
 int n=nums.size();
-//if sum is less than k 
-//move end by one position
-//update count and sum accordingly
-//for last element
-//end may become n
-// if sum is greater than or equal to k 
-//subtract arr[start] from sum
-//deacrease sliding window by moving start by one position
+
+ALGORITHM
+1.we will add an element to our window if at this moment sum<k
+2.end++
+3.now update both count and sum
+4.count of element will be equal to subarray length i.e end-start
+but first check if end>=start...otherwise count will become negative
+
+5.add arr[end] to sum.........but first check for edge case.....that is to say if end<n ....then only add to sum
+
+6.if sum becomes greater than or equal to  k then remove arr[start] from sum and deacrease window size by moving start++
+
+7.do all above steps till end<n
+
+8.return cnt
 
 
 */
 #include <bits/stdc++.h>
 using namespace std;
-int countSubarraySumLessThanK(vector<int>&nums,int k){
+int countSubarraySumLessThanK(vector<int>&arr,int n,int k){
     int start=0,end=0;
-    int count=0,sum=nums[0];
-    int n=nums.size();
-    while(start<n && end<n){
-        //if sum is less than k 
-        //move end by one position
-        //update count and sum accordingly
+    int cnt=0,sum=arr[0];
+    while(end<n){
+        //add element to our window till sum<k
         if(sum<k){
             end++;
+            //update sum and count
+            if(end>=start)
+             cnt+=end-start;
+            if(end<n)
+             sum+=arr[end];
         }
-        if(end>=start)
-        count+=end-start;
-        //for last element
-        //end may become n
-        if(end<n){
-            sum+=nums[end];
-        }
-        // if sum is greater than or equal to k 
-        //subtract arr[start] from sum
-        //deacrease sliding window by moving start by one position
+        //if sum>=k ...remove arr[start] from sum and decrease window 
+        //size by moving start by 1
         else{
-            sum-=nums[start];
+            sum-=arr[start];
             start++;
         }
-        
     }
-    return count;
+    return cnt;
 }
 
 int main() {
-    vector<int>nums({2,5,6});
-	cout<<countSubarraySumLessThanK(nums,10)<<endl;
+    vector<int>arr({ 1, 11, 2, 3, 15 });
+	cout<<countSubarraySumLessThanK(arr,5,10);
 	return 0;
 }
