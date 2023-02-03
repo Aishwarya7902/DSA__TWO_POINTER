@@ -5,34 +5,34 @@ TC:O(N)
 SC:O(1)
 */
 
-class Solution
-{
-  private:
- long long int solve(string &s, int k) {
-      if(s.size()==0)return 0;
-      map<char,int>mp;
-       long long int cnt=0;
-      int left=0;
-      for(int i=0;i<s.size();i++){
-          mp[s[i]]++;
-          while(mp.size()>k){
-              mp[s[left]]--;
-              if(mp[s[left]]==0){
-                  mp.erase(s[left]);
-              }
-              left++;
-              
-          }
-          cnt+=i-left+1;
-      }
-    	//code here.
-    	return cnt;
+#include <bits/stdc++.h>
+using namespace std;
+int AtmostKChar(string s,int k){
+    int n=s.size();
+    int begin=0,end=0;
+    int cnt=0;
+    unordered_map<char,int>mp;
+    while(end<n){
+        mp[s[end]]++;
+        end++;
+       
+        while(mp.size()>k)
+        {
+            mp[s[begin]]--;
+            if(mp[s[begin]]==0)
+             mp.erase(s[begin]);
+            
+             begin++;
+        }
+        cnt+=end-begin+1;
     }
-  public:
-    
-    long long int substrCount (string &s, int k) {
-    	//code here.
-    return solve(s,k) - solve(s,k-1);
-    }
-};
-NOTE:GIVING TLE IN GFF (PAGAL HO GAYE HAIN YE LOG)
+    return cnt;
+}
+
+int main() {
+//     string s="abc";
+// 	cout<<ExactKChar(s,2);
+string s="abcbaa";
+	cout<<AtmostKChar(s,3)-AtmostKChar(s,2);
+	return 0;
+}
