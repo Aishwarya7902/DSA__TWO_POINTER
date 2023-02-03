@@ -12,58 +12,58 @@ sc:o(1)
 /*
 
 method 2:
-sliding window and hashing
-1.Initialize a HashMap
-2.Stores the start and end
-  indices of sliding window
-3. Store the required result in ans
-4.Iterate while the end
-    pointer is less than n
-5.Include the character at
-        the end of the window
-6.Increment end pointer by 
-        end++;
-7.Iterate until count of distinct
-        // characters becomes less than K
-8.Remove the character from
-            // the beginning of window
-9.If its frequency is 0,
-            // remove it from the map
-10. Update the answer
-            ans += s.length() - end + 1;
-            begin++;           
+
 tc:o(n)
-sc:
+sc: o(n)
+
+ALGORITHM
+1.begin and end represent the start and end of window
+2.cnt stores our ans
+3.map stores frequency of each character of our window
+4.we will perform steps till end<n
+5.include current char in map till size of map <k
+6.move end by 1
+7.if map size >=k .....then remove start char ...and calculate ans for all substrings 
+  which start from begin and are in range of n
+8.return cnt
 */
 
 #include <bits/stdc++.h>
 using namespace std;
-int CountSubstringWithAtleasKChar(string s, int k){
-    int ans=0;
-    int begin=0,end=0;
+int atleastKDistinctChars(string s,int k){
     int n=s.size();
+    //begin and end represent the start and end of window
+    //cnt stores our ans
+    int begin=0,end=0;
+    int cnt=0;
+    //map stores frequency of each character of our window
     unordered_map<char,int>mp;
+    //we will perform steps till end<n
     while(end<n){
-        char ch = s[end];
-        mp[ch]++;
+        //include current char in map till size of map <k
+        
+        mp[s[end]]++;
+        //move end by 1
+        
         end++;
+        
+        //if map size >=k .....then remove start char ...and calculate ans for all substrings 
+        //which start from begin and are in range of n
+        
         while(mp.size()>=k){
-            char pre = s[begin];
-            mp[pre]--;
-           if( mp[pre]==0){
-               mp.erase(pre);
-           }
-            ans+=n-end+1;
+            mp[s[begin]]--;
+            if(mp[s[begin]]==0)
+             mp.erase(s[begin]);
+            cnt+=n-end+1;
             begin++;
         }
-       
     }
-    return ans;
+    return cnt;
+    
 }
 
 int main() {
-     string S = "abcca";
-    int K = 3;
-	cout<<CountSubstringWithAtleasKChar(S,K);
+    string s="abcca";
+	cout<<atleastKDistinctChars(s,3);
 	return 0;
 }
