@@ -54,7 +54,8 @@ int atleastKDistinctChars(string s,int k){
             mp[s[begin]]--;
             if(mp[s[begin]]==0)
              mp.erase(s[begin]);
-            cnt+=n-end+1;
+            cnt+=n-end+1;  //why this formula ...cnt+=n-end+1  ❤️feel: cnt+=last_indx-end + 1(start wale se jo substring banega uske liye +1 kiya) +1
+		//coz end ko subtract kar diya jabki usko bhi add karna tha
             begin++;
         }
     }
