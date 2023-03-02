@@ -85,3 +85,28 @@ int main() {
 	cout<<countSubarraySumLessThanK(arr,5,10);
 	return 0;
 }
+
+/*METHOD 3:
+VIDEO LINK(FOR BETTER EXPLANATION):https://www.youtube.com/watch?v=Hts2wpzhuwQ&t=156s
+*/
+#include <bits/stdc++.h>
+using namespace std;
+int countSubarraySumLessThanK(vector<int>&arr,int n,int k){
+    int left=0;
+    int cnt=0,sum=0;
+    for(int right=0;right<n;right++){
+        sum+=arr[right];
+        while(sum>=k){
+            sum-=arr[left];
+            left++;
+        }
+        cnt+=right-left+1;
+    }
+    return cnt;
+}
+
+int main() {
+    vector<int>arr({ 1, 11, 2, 3, 15 });
+	cout<<countSubarraySumLessThanK(arr,5,10);
+	return 0;
+}
