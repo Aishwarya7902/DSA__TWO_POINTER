@@ -50,3 +50,25 @@ public:
         return cnt;
     }
 };
+
+/*method 2
+*/
+
+class Solution {
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+       int left=0,right;
+       long prod=1;
+       int cnt=0;
+       for(right=0;right<nums.size();right++){
+           prod*=nums[right];
+           while(prod>=k and left<nums.size()){
+               prod/=nums[left];
+               left++;
+           }
+           if(prod<k)
+           cnt+=right-left+1;
+       }
+       return cnt; 
+    }
+};
