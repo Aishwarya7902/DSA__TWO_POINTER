@@ -17,55 +17,54 @@ tc:o(n)
 sc: o(n)
 
 ALGORITHM
-1.begin and end represent the start and end of window
-2.cnt stores our ans
-3.map stores frequency of each character of our window
-4.we will perform steps till end<n
-5.include current char in map till size of map <k
-6.move end by 1
-7.if map size >=k .....then remove start char ...and calculate ans for all substrings 
-  which start from begin and are in range of n
-8.return cnt
+
 */
 
 #include <bits/stdc++.h>
 using namespace std;
-int atleastKDistinctChars(string s,int k){
+int atleastKDistinctChars(string&s,int k){
+    //i denotes start ,j denotes end,ans stores our result
+    int i=0,j=0,ans=0;
     int n=s.size();
-    //begin and end represent the start and end of window
-    //cnt stores our ans
-    int begin=0,end=0;
-    int cnt=0;
-    //map stores frequency of each character of our window
-    unordered_map<char,int>mp;
-    //we will perform steps till end<n
-    while(end<n){
-        //include current char in map till size of map <k
+    unordered_map<char,int>mp; //stores distinc char
+    while(j<n){
+        //initially we will have to do some calculations on j untill condition hits and increase j
         
-        mp[s[end]]++;
-        //move end by 1
         
-        end++;
+        mp[s[j]]++;
+        j++;
         
-        //if map size >=k .....then remove start char ...and calculate ans for all substrings 
-        //which start from begin and are in range of n
+        //now condition hits❤️
         
-        while(mp.size()>=k){
-            mp[s[begin]]--;
-            if(mp[s[begin]]==0)
-             mp.erase(s[begin]);
-            cnt+=n-end+1;  //why this formula ...cnt+=n-end+1  ❤️feel: cnt+=last_indx-end + 1(start wale se jo substring banega uske liye +1 kiya) +1
-		//coz end ko subtract kar diya jabki usko bhi add karna tha
-		//if we simplify...(last_indx+1=n)
-            begin++;
+        /*here question says atleast k distinct char ...now what does it mean..???????.........it means count 
+        of distinct char should be >=k.....so the condition is count of distinct char
+        >=k
+        */
+        
+        /*
+        when condition hits ...do certain things before sliding the window
+        1.unaffect the effect of i
+        2.get an ans from our calculation till now
+        3.slide the window;
+        */
+        
+        
+        while(i<=j && mp.size()>=k){
+            mp[s[i]]--;
+            if(mp[s[i]]==0)mp.erase(s[i]);
+            ans+=n-j+1; //ans <--calc..
+            /*why ans+=n-j+1 because before entering inner while loop..... j will have moved one step
+            now no of subarrays having atleast k distinct char will be all subarray whose start was i and end will be at j,j+1 and so 
+            on...till end
+            hence n-j+1 (+1 because j wale ko include karna tha na)
+            */
+            i++;
         }
     }
-    return cnt;
-    
+    return ans;
 }
 
 int main() {
-    string s="abcca";
+    string s="abccd";
 	cout<<atleastKDistinctChars(s,3);
 	return 0;
-}
