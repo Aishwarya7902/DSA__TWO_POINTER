@@ -13,7 +13,7 @@ use hashing
 /*
 two pointer
 use a pair of vector to store number and its correponding element before sorting
-tc:o(n)
+tc:o(nlogn) //due to sorting
 sc:o(n)
 */
 class Solution {
