@@ -1,4 +1,4 @@
-Given an array of integers, our goal is to find the length of the largest subarray having the sum of its elements at most ‘k’ where k>0.
+Given an array of integers, our goal is to find the length of the largest subarray having the sum of its elements at most ‘k’ (i.e sum <= ‘k’) where k>0.
 
 NOTE : all elements are +ve
 
